@@ -23,8 +23,6 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "display7SEG.h"
-#include "global.h"
-#include "fsm_automatic.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -92,32 +90,21 @@ int main(void) {
 
 	/* Infinite loop */
 	/* USER CODE BEGIN WHILE */
-//	int counter = 10;
+	int counter = 10;
 //	int red = 5;
 //	int yellow = 2;
 //	int green = 3;
-	status = INIT;
+
 	while (1) {
-//		counter--;
-//		if (counter >= 0) {
-//			if (counter >= 7 && counter <= 9) {
-//				display7SEG(green--);
-//			}
-//
-//			if (counter >= 5 && counter <= 6) {
-//				display7SEG(yellow--);
-//			}
-//
-//			if (counter >= 0 && counter <= 4) {
-//				display7SEG(red--);
-//			}
-//
-//			traffic_led(counter);
-//		} else {
-//			counter = 10;
-//		}
-		fsm_automatic_run();
-//		HAL_Delay(1000);
+		counter--;
+		if (counter >= 0) {
+			display7SEG(counter);
+			traffic_led(counter);
+		} else {
+			counter = 10;
+		}
+
+		HAL_Delay(1000);
 		/* USER CODE END WHILE */
 
 		/* USER CODE BEGIN 3 */
