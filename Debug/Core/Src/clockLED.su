@@ -1,0 +1,4 @@
+clockLED.c:11:6:clearAllClock	8	static
+clockLED.c:26:6:setNumberOnClock	16	static
+clockLED.c:70:6:clearNumberOnClock	16	static
+clockLED.c:114:6:Clock	24	static
