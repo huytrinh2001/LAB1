@@ -109,6 +109,7 @@ int main(void) {
 		setNumberOnClock(minute / 5);
 		setNumberOnClock(sec / 5);
 		setNumberOnClock(hour);
+
 		/* USER CODE END WHILE */
 
 		/* USER CODE BEGIN 3 */
