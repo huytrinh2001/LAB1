@@ -90,18 +90,32 @@ int main(void) {
 
 	/* Infinite loop */
 	/* USER CODE BEGIN WHILE */
-	int counter = 10;
-//	int red = 5;
-//	int yellow = 2;
-//	int green = 3;
-
+//	int counter = 10;
 	while (1) {
-		counter--;
-		if (counter >= 0) {
-			display7SEG(counter);
-			traffic_led(counter);
-		} else {
-			counter = 10;
+		switch (status) {
+		case AUTO_RED:
+			traffic_led(red--);
+			if (red <= 0) {
+				status = AUTO_GREEN;
+				green = 3;
+			}
+			break;
+		case AUTO_GREEN:
+			traffic_led(green--);
+			if (green <= 0) {
+				status = AUTO_YELLOW;
+				yellow = 2;
+			}
+			break;
+		case AUTO_YELLOW:
+			traffic_led(yellow--);
+			if (yellow <= 0) {
+				status = AUTO_RED;
+				red = 5;
+			}
+			break;
+		default:
+			break;
 		}
 
 		HAL_Delay(1000);
