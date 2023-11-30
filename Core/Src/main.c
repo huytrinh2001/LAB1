@@ -22,6 +22,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "fsm.h"
 #include "display7SEG.h"
 /* USER CODE END Includes */
 
@@ -92,32 +93,8 @@ int main(void) {
 	/* USER CODE BEGIN WHILE */
 //	int counter = 10;
 	while (1) {
-		switch (status) {
-		case AUTO_RED:
-			traffic_led(red--);
-			if (red <= 0) {
-				status = AUTO_GREEN;
-				green = 3;
-			}
-			break;
-		case AUTO_GREEN:
-			traffic_led(green--);
-			if (green <= 0) {
-				status = AUTO_YELLOW;
-				yellow = 2;
-			}
-			break;
-		case AUTO_YELLOW:
-			traffic_led(yellow--);
-			if (yellow <= 0) {
-				status = AUTO_RED;
-				red = 5;
-			}
-			break;
-		default:
-			break;
-		}
-
+		fsm1_run();
+		fsm2_run();
 		HAL_Delay(1000);
 		/* USER CODE END WHILE */
 
@@ -171,16 +148,19 @@ static void MX_GPIO_Init(void) {
 	__HAL_RCC_GPIOB_CLK_ENABLE();
 
 	/*Configure GPIO pin Output Level */
-	HAL_GPIO_WritePin(GPIOA, LED_RED_1_Pin | LED_YELLOW_1_Pin | LED_GREEN_1_Pin,
-			GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(GPIOA,
+			LED_RED_2_Pin | LED_YELLOW_2_Pin | LED_GREEN_2_Pin | LED_RED_1_Pin
+					| LED_YELLOW_1_Pin | LED_GREEN_1_Pin, GPIO_PIN_RESET);
 
 	/*Configure GPIO pin Output Level */
 	HAL_GPIO_WritePin(GPIOB,
 			LED_A_Pin | LED_B_Pin | LED_C_Pin | LED_D_Pin | LED_E_Pin
 					| LED_F_Pin | LED_G_Pin, GPIO_PIN_RESET);
 
-	/*Configure GPIO pins : LED_RED_1_Pin LED_YELLOW_1_Pin LED_GREEN_1_Pin */
-	GPIO_InitStruct.Pin = LED_RED_1_Pin | LED_YELLOW_1_Pin | LED_GREEN_1_Pin;
+	/*Configure GPIO pins : LED_RED_2_Pin LED_YELLOW_2_Pin LED_GREEN_2_Pin LED_RED_1_Pin
+	 LED_YELLOW_1_Pin LED_GREEN_1_Pin */
+	GPIO_InitStruct.Pin = LED_RED_2_Pin | LED_YELLOW_2_Pin | LED_GREEN_2_Pin
+			| LED_RED_1_Pin | LED_YELLOW_1_Pin | LED_GREEN_1_Pin;
 	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
 	GPIO_InitStruct.Pull = GPIO_NOPULL;
 	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;

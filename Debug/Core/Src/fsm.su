@@ -1,0 +1,2 @@
+fsm.c:11:6:fsm1_run	8	static
+fsm.c:36:6:fsm2_run	8	static

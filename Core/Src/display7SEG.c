@@ -8,10 +8,14 @@
 #include "main.h"
 #include "display7SEG.h"
 
+int s_status = 5;
 int status = 1;
 int red = 5;
 int yellow = 2;
 int green = 3;
+int s_red = 5;
+int s_yellow = 2;
+int s_green = 3;
 
 void display7SEG(int counter) {
 	switch (counter) {
@@ -110,8 +114,7 @@ void display7SEG(int counter) {
 	}
 }
 
-void traffic_led(int value) {
-
+void traffic_led_1(int value) {
 	switch (status) {
 	case AUTO_RED:
 		HAL_GPIO_WritePin(LED_RED_1_GPIO_Port, LED_RED_1_Pin, 1);
@@ -136,3 +139,27 @@ void traffic_led(int value) {
 	}
 }
 
+void traffic_led_2(int value) {
+	switch (s_status) {
+	case AUTO_RED_2:
+		HAL_GPIO_WritePin(LED_RED_2_GPIO_Port, LED_RED_2_Pin, 1);
+		HAL_GPIO_WritePin(LED_YELLOW_2_GPIO_Port, LED_YELLOW_2_Pin, 0);
+		HAL_GPIO_WritePin(LED_GREEN_2_GPIO_Port, LED_GREEN_2_Pin, 0);
+//		display7SEG(value);
+		break;
+	case AUTO_GREEN_2:
+		HAL_GPIO_WritePin(LED_RED_2_GPIO_Port, LED_RED_2_Pin, 0);
+		HAL_GPIO_WritePin(LED_YELLOW_2_GPIO_Port, LED_YELLOW_2_Pin, 0);
+		HAL_GPIO_WritePin(LED_GREEN_2_GPIO_Port, LED_GREEN_2_Pin, 1);
+//		display7SEG(value);
+		break;
+	case AUTO_YELLOW_2:
+		HAL_GPIO_WritePin(LED_RED_2_GPIO_Port, LED_RED_2_Pin, 0);
+		HAL_GPIO_WritePin(LED_YELLOW_2_GPIO_Port, LED_YELLOW_2_Pin, 1);
+		HAL_GPIO_WritePin(LED_GREEN_2_GPIO_Port, LED_GREEN_2_Pin, 0);
+//		display7SEG(value);
+		break;
+	default:
+		break;
+	}
+}
