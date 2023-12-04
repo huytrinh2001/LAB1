@@ -66,6 +66,7 @@ int main(void) {
 	int hour = 0;
 	int sec = 0;
 	int minute = 0;
+
 	/* USER CODE END 1 */
 
 	/* MCU Configuration--------------------------------------------------------*/
@@ -87,12 +88,35 @@ int main(void) {
 	/* Initialize all configured peripherals */
 	MX_GPIO_Init();
 	/* USER CODE BEGIN 2 */
+	clearAllClock();
 
 	/* USER CODE END 2 */
 
 	/* Infinite loop */
 	/* USER CODE BEGIN WHILE */
+	//int count_sec = 0;
 	while (1) {
+//	  if(sec > 60){
+//		  clearNumberOnClock(minute/5);
+//		  sec=0;
+//		  minute++;
+//		  setNumberOnClock(minute/5);
+//	  }
+//
+////	  if (count_sec == 5){
+////		  minute++;
+////		  count_sec = 0;
+////	  }
+//	  else 	  Clock(hour,minute,sec);
+//	  if (minute > 11){
+//		  clearNumberOnClock(hour);
+//		  hour++;
+//		  minute = 0;
+//	  }
+//	  if(hour >11){
+//		  hour = 0;
+//	  }
+
 		sec++;
 		if (sec >= 60) {
 			minute++;
@@ -104,12 +128,12 @@ int main(void) {
 			minute = 0;
 		}
 
-		HAL_Delay(1000);
+		HAL_Delay(10);
 		clearAllClock();
 		setNumberOnClock(minute / 5);
 		setNumberOnClock(sec / 5);
 		setNumberOnClock(hour);
-
+		//sec++;
 		/* USER CODE END WHILE */
 
 		/* USER CODE BEGIN 3 */
